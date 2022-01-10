@@ -1,88 +1,110 @@
 // http://api.nbp.pl/
 window.addEventListener("DOMContentLoaded", (e) => {
-  var exchangeForm = document.querySelector(".exchange-form");
-  var types = document.querySelectorAll('input[name="operation"]');
-  var bids = document.getElementById("bids");
-  var bidValue;
-  var asks = document.getElementById("asks");
-  var askValue;
+  var datas;
+
+  var changeOperations = document.querySelector(".exchangeForm__operations");
+  var radios = document.querySelectorAll("input[name='operation']");
+  var exchangeForm = document.querySelector(".exchangeForm");
+  var selctions = document.getElementById("slection");
+  var finalCalculation = document.querySelector(
+    ".exchangeForm__finalCalculation"
+  );
+  var resultMessage = document.querySelector(".result__text");
+  var resultValue = document.querySelector(".result__value");
+  var selectionValue;
 
   // const api_url_tableA =
   //   "http://api.nbp.pl/api/exchangerates/tables/a/?format=json";
   // const api_url_tableB =
   //   "http://api.nbp.pl/api/exchangerates/tables/b/?format=json";
   const api_url_tableC =
-    "http://api.nbp.pl/api/exchangerates/tables/c/?format=json";
+    "https://api.nbp.pl/api/exchangerates/tables/c/?format=json";
 
   async function getApi(url) {
     const response = await fetch(url);
     var data = await response.json();
-    var datas = data.values().next().value;
+    datas = data.values().next().value;
     showTable(datas);
-    determineSelectionLists(datas);
+    determinValuesOfSelectTag(datas);
   }
 
   function showTable(data) {
-    // if slected == pln{
-    // data.push() --> PLN currency
-    // }
     let tab = `<tr>
           <th>Waluta</th>
           <th>Kod</th>
-          <th>Kurs zakupu</th>
+          <th>Kurs kupna</th>
           <th>Kurs sprzedarzy</th>
           </tr>`;
 
     for (let c of data.rates) {
       tab += `<tr> 
-          <td>${c.currency} </td>
-          <td>${c.code}</td>
-          <td>${c.bid}</td>
-          <td>${c.ask}</td>
+          <td class="table__currency">${c.currency} </td>
+          <td class="table__item">${c.code}</td>
+          <td class="table__item">${c.bid.toFixed(4)}</td>
+          <td class="table__item">${c.ask.toFixed(4)}</td>
           </tr>`;
     }
     document.getElementById("currenciesTable").innerHTML = tab;
   }
 
-  function determineSelectionLists(data) {
+  function determinValuesOfSelectTag(data, target = selectedRadio) {
+    resultMessage.hidden = true;
     for (let c of data.rates) {
-      bidValue = document.createElement("option");
-      bidValue.append(document.createTextNode(c.code + "(" + c.currency + ")"));
-      bidValue.value = c.bid;
-      bids.append(bidValue);
-      askValue = document.createElement("option");
-      askValue.append(document.createTextNode(c.code + "(" + c.currency + ")"));
-      askValue.value = c.ask;
-      asks.append(askValue);
+      selctions.remove(c.code + "(" + c.currency + ")");
+    }
+
+    for (let c of data.rates) {
+      selectionValue = document.createElement("option");
+      selectionValue.append(
+        document.createTextNode(c.code + "(" + c.currency + ")")
+      );
+      if (target == "sell") {
+        selectionValue.value = c.bid;
+      } else if (target == "buy") {
+        selectionValue.value = c.ask;
+      }
+      selctions.append(selectionValue);
+    }
+
+    if (target == "sell") {
+      resultMessage.textContent = "Otrzymasz";
+    } else if (target == "buy") {
+      resultMessage.textContent = "Musisz zapłacić";
     }
   }
 
-  getApi(api_url_tableC);
+  let result = (selection, amount, e) => selection.value * amount;
 
-  exchangeForm.addEventListener("change", (e) => {
-    let target = e.target;
-    if (target.id == "sell") {
-      console.log("sell");
-    } else {
-      console.log("buy");
-    }
-  });
-  exchangeForm.addEventListener("submit", (e) => {
-    let amount = document.getElementById("amount").value;
-    let selectedType;
-    for (let rb of types) {
-      if (rb.checked) {
-        selectedType = rb.value;
-        break;
+  function checkRadioButtons() {
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        finalCalculation.hidden = false;
+        return radios[i].value;
       }
     }
-    calculate(bids, asks, amount, selectedType, e);
+    return;
+  }
+
+  changeOperations.addEventListener("change", (e) => {
+    finalCalculation.hidden = false;
+    resultValue.hidden = true;
+    let target = e.target.value;
+    determinValuesOfSelectTag(datas, target);
   });
 
-  function calculate(sellCurency, buyCurrency, amount, type, e) {
-    console.log(sellCurency.value);
-    console.log(buyCurrency.value);
-    console.log(amount);
-    console.log(type);
-  }
+  selctions.addEventListener("change", (e) => {
+    resultMessage.hidden = true;
+    resultValue.hidden = true;
+  });
+
+  exchangeForm.addEventListener("submit", (e) => {
+    let amount = document.getElementById("amount").value;
+    resultMessage.hidden = false;
+    resultValue.hidden = false;
+    console.log(document.createTextNode(result(selctions, amount, e)));
+    resultValue.textContent = result(selctions, amount, e).toFixed(4);
+  });
+
+  var selectedRadio = checkRadioButtons();
+  getApi(api_url_tableC);
 });

@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  // min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  height: 400px;
+  td {
+    width: 125px;
+  }
+  &__currency {
+    text-align: left;
+  }
+  &__item {
+    text-align: center;
+  }
+}
+
+.result {
+  display: flex;
+  gap: 5px;
+}
