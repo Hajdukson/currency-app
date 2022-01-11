@@ -1,0 +1,41 @@
+.exchangeForm {
+  &__operations {
+    box-shadow: var(--shadow);
+    border: 2px solid var(--base-color);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  &__finalCalculation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  &__inputAndSubmit {
+    position: relative;
+    &--error {
+      position: absolute;
+      transform: translate(50%);
+      right: 60%;
+      bottom: -20px;
+
+      width: 100px;
+      color: rgba(255, 0, 0, 0.692);
+    }
+    i {
+      position: absolute;
+      transform: translateY(-50%);
+      right: 70px;
+      top: 50%;
+    }
+  }
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  gap: 5px;
+}

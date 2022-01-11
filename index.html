@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./resources/css/style.css">
-    <script src="./scripts.js"></script>
+    <script src="./resources/js/scripts.js"></script>
     <script
       src="https://kit.fontawesome.com/f87f2c2ad2.js"
       crossorigin="anonymous"
@@ -13,35 +13,43 @@
     <title>Wymiana walut</title>
   </head>
   <body>
-    <header class="about">
-      <h1 class="about_introdaction"></h1>
-    </header>
-    <table class="table" id="currenciesTable"></table>
-    <br />
-    <br />
-    <form action="javascript:void(0);" class="exchangeForm">
-      <fieldset class="exchangeForm__operations">
-        <legend>Co chcesz zrobić</legend>
-        <div>
-          <input type="radio" id="sell" name="operation" value="sell" checked="true"/>
-          <label for="sell">Sprzedać</label>
+    <div class="table">
+      <header >
+        <h1 class="table__header">Obecny kurs walut pobrany z <a href="http://api.nbp.pl" target="_balk">API NBP</a></h1>
+      </header>
+      <table class="table__content" id="currenciesTable"></table>
+    </div>
+    <div class="form">
+      <form action="javascript:void(0);" class="exchangeForm">
+        <fieldset class="exchangeForm__operations">
+          <legend>Co chcesz zrobić</legend>
+          <div>
+            <input type="radio" id="sell" name="operation" value="sell" checked="true"/>
+            <label for="sell">Sprzedać</label>
+          </div>
+          <div>
+            <input type="radio" id="buy" name="operation" value="buy" />
+            <label for="buy">Kupić</label>
+          </div>
+        </fieldset>
+        <div class="exchangeForm__finalCalculation" >
+          <div>
+            <label for="slection">Wybierz walutę </label>
+            <select name="slection-circe" id="slection">
+            </select>
+          </div>
+          <div class="exchangeForm__inputAndSubmit">
+            <input id="amount" type="number" placeholder="Podaj kwotę" />
+            <i class="fa fa-info-circle"></i>
+            <i class="fa fa-check-circle" ></i>
+            <small class="exchangeForm__inputAndSubmit--error">Error message</small>
+            <input type="submit" value="Oblicz" />
+          </div>
         </div>
-        <div>
-          <input type="radio" id="buy" name="operation" value="buy" />
-          <label for="buy">Kupić</label>
-        </div>
-      </fieldset>
-      <div class="exchangeForm__finalCalculation" >
-        <label for="slection">Wybierz walutę </label>
-        <select name="slection" id="slection"></select>
-        <br>
-        <br>
-        <input id="amount" type="number" placeholder="Podaj kwotę" />
-        <input type="submit" value="Oblicz" />
+      </form>
+      <div class="result">
+        <p class="result__text"><p class="result__value"> </p></p>
       </div>
-    </form>
-    <div class="result">
-      <p class="result__text"><p class="result__value"> </p></p>
     </div>
   </body>
 </html>

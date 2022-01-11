@@ -1,6 +1,6 @@
 // http://api.nbp.pl/
 window.addEventListener("DOMContentLoaded", (e) => {
-  var datas;
+  var loadedData;
 
   var changeOperations = document.querySelector(".exchangeForm__operations");
   var radios = document.querySelectorAll("input[name='operation']");
@@ -23,9 +23,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
   async function getApi(url) {
     const response = await fetch(url);
     var data = await response.json();
-    datas = data.values().next().value;
-    showTable(datas);
-    determinValuesOfSelectTag(datas);
+    data = data.values().next().value;
+    loadedData = data;
+    showTable(data);
+    determinValuesOfSelectTag(data);
   }
 
   function showTable(data) {
@@ -38,10 +39,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
     for (let c of data.rates) {
       tab += `<tr> 
-          <td class="table__currency">${c.currency} </td>
-          <td class="table__item">${c.code}</td>
-          <td class="table__item">${c.bid.toFixed(4)}</td>
-          <td class="table__item">${c.ask.toFixed(4)}</td>
+          <td class="table__content--currency">${c.currency} </td>
+          <td class="table__content--item">${c.code}</td>
+          <td class="table__content--item">${c.bid.toFixed(4)}</td>
+          <td class="table__content--item">${c.ask.toFixed(4)}</td>
           </tr>`;
     }
     document.getElementById("currenciesTable").innerHTML = tab;
@@ -89,7 +90,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     finalCalculation.hidden = false;
     resultValue.hidden = true;
     let target = e.target.value;
-    determinValuesOfSelectTag(datas, target);
+    determinValuesOfSelectTag(loadedData, target);
   });
 
   selctions.addEventListener("change", (e) => {
@@ -102,7 +103,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     resultMessage.hidden = false;
     resultValue.hidden = false;
     console.log(document.createTextNode(result(selctions, amount, e)));
-    resultValue.textContent = result(selctions, amount, e).toFixed(4);
+    resultValue.textContent = result(selctions, amount, e).toFixed(2) + " PLN";
   });
 
   var selectedRadio = checkRadioButtons();

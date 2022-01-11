@@ -1,0 +1,49 @@
+:root {
+  --base-color: #00cccc;
+  --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.05),
+    0px 10px 10px rgba(0, 0, 0, 0.05), 0px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  color: #555;
+  font-family: "Arial";
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  gap: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  color: #555;
+  background-color: var(--base-color);
+  border-radius: 4px;
+  border: none;
+  box-shadow: var(--shadow);
+  height: 40px;
+  cursor: pointer;
+  &:hover {
+    background-color: #02ffffa4;
+  }
+}
+
+input[type="submit"] {
+  background-color: var(--base-color);
+  border: 2px solid #f0f0f0;
+  color: #555;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #00cccc62;
+  }
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  color: #555;
+  appearance: textfield;
+  padding: 10px;
+  border-radius: 4px;
+  border: 2px solid #f0f0f0;
+}
