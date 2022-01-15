@@ -1,11 +1,12 @@
 # Currency app (college project)
 
+Responsive website written in [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [SCSS](https://sass-lang.com/documentation)  
 This application uses [NBP API](http://api.nbp.pl/) to GET current exchange rates from [table C](http://api.nbp.pl/api/exchangerates/tables/c)
 
 ## Features
 
-- calculates the amount of PLN to selected currency and reverse
-  You can see live demo [here](https://michal-hajduk-currency-app.netlify.app/)
+- calculates the amount of PLN to a selected currency and reverse  
+  You can see a live demo [here](https://michal-hajduk-currency-app.netlify.app/)
 
 # Examples of code
 
