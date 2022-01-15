@@ -86,11 +86,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
       if (radios[i].checked) {
         let radio = radios[i].value;
         finalCalculation.hidden = false;
-        // if (target == "sell") {
-        //   amount.placeholder = "Kwota jaką chcesz wymienić";
-        // } else {
-        //   amount.placeholder = "Kwota jaką chcesz otrzymać";
-        // }
         return radios[i].value;
       }
     }
@@ -103,11 +98,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
     resultValue.hidden = true;
     let target = e.target.value;
     operationValue = target;
-    // if (target == "sell") {
-    //   amount.placeholder = "Kwota jaką chcesz wymienić";
-    // } else {
-    //   amount.placeholder = "Kwota jaką chcesz otrzymać";
-    // }
     finalCalculation.hidden = false;
     determinValuesOfSelectTag(loadedData, target);
   });
@@ -138,7 +128,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
     resultMessage.hidden = false;
     resultValue.hidden = false;
     resultValue.textContent = result(operationValue, value, selctions);
-    // resultValue.textContent = result(selctions, value, e).toFixed(2) + " PLN";
   });
 
   let hideMessage = () => {
