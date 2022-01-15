@@ -14,7 +14,6 @@
     tr {
       &:hover {
         background: #f4f4f4;
-
         td {
           color: #555;
         }
@@ -38,6 +37,37 @@
     }
     &--item {
       text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 375px) {
+  .table {
+    &__header {
+      font-size: 16px;
+    }
+    &__content {
+      width: 300px;
+      font-size: 12px;
+      th,
+      td {
+        color: #999;
+        border: 1px solid #eee;
+        padding: 2px 4px;
+        border-collapse: collapse;
+      }
+      th {
+        color: #fff;
+        font-size: 10px;
+        width: 30px;
+        text-align: left;
+      }
+      &--currency {
+        text-align: left;
+      }
+      &--item {
+        text-align: center;
+      }
     }
   }
 }

@@ -5,17 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./resources/css/style.css">
-    <script src="./resources/js/scripts.js"></script>
     <script
       src="https://kit.fontawesome.com/f87f2c2ad2.js"
       crossorigin="anonymous"
     ></script>
+    
+    <script type="module" src="./resources/js/scripts.js"></script>
+    <!-- <script src="./resources/js/validation.js"></script> -->
+    
     <title>Wymiana walut</title>
   </head>
   <body>
     <div class="table">
       <header >
-        <h1 class="table__header">Obecny kurs walut pobrany z <a href="http://api.nbp.pl" target="_balk">API NBP</a></h1>
+        <h1 class="table__header">Obecny kurs walut pobrany z <a href="http://api.nbp.pl" target="_blank">API NBP</a></h1>
       </header>
       <table class="table__content" id="currenciesTable"></table>
     </div>
@@ -24,25 +27,25 @@
         <fieldset class="exchangeForm__operations">
           <legend>Co chcesz zrobić</legend>
           <div>
-            <input type="radio" id="sell" name="operation" value="sell" checked="true"/>
-            <label for="sell">Sprzedać</label>
+            <input type="radio" id="sell" name="operation" value="sell"/>
+            <label for="sell">Wymienić obcą walutę</label>
           </div>
           <div>
-            <input type="radio" id="buy" name="operation" value="buy" />
-            <label for="buy">Kupić</label>
+            <input type="radio" id="buy" name="operation" value="buy" checked="true"/>
+            <label for="buy">Wymienić PLN na obcą walutę</label>
           </div>
         </fieldset>
         <div class="exchangeForm__finalCalculation" >
           <div>
             <label for="slection">Wybierz walutę </label>
-            <select name="slection-circe" id="slection">
+            <select name="slection" id="slection">
             </select>
           </div>
           <div class="exchangeForm__inputAndSubmit">
             <input id="amount" type="number" placeholder="Podaj kwotę" />
-            <i class="fa fa-info-circle"></i>
-            <i class="fa fa-check-circle" ></i>
-            <small class="exchangeForm__inputAndSubmit--error">Error message</small>
+            <i id="error" class="fa fa-info-circle"></i>
+            <i id="succes"class="fa fa-check-circle" ></i>
+            <small class="exchangeForm__inputAndSubmit--error"></small>
             <input type="submit" value="Oblicz" />
           </div>
         </div>

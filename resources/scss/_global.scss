@@ -39,11 +39,9 @@ input[type="submit"] {
     background-color: #00cccc62;
   }
 }
-input[type="number"] {
-  -moz-appearance: textfield;
-  color: #555;
-  appearance: textfield;
-  padding: 10px;
-  border-radius: 4px;
-  border: 2px solid #f0f0f0;
+
+@media screen and (max-width: 1023px) and (min-width: 375px) {
+  body {
+    flex-direction: column;
+  }
 }

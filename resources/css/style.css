@@ -49,14 +49,22 @@ input[type="submit"]:hover {
   background-color: #00cccc62;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-  color: #555;
-  -webkit-appearance: textfield;
-          appearance: textfield;
-  padding: 10px;
-  border-radius: 4px;
-  border: 2px solid #f0f0f0;
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 375px) {
+  body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .table__header {
@@ -107,6 +115,35 @@ input[type="number"] {
   text-align: center;
 }
 
+@media screen and (max-width: 767px) and (min-width: 375px) {
+  .table__header {
+    font-size: 16px;
+  }
+  .table__content {
+    width: 300px;
+    font-size: 12px;
+  }
+  .table__content th,
+  .table__content td {
+    color: #999;
+    border: 1px solid #eee;
+    padding: 2px 4px;
+    border-collapse: collapse;
+  }
+  .table__content th {
+    color: #fff;
+    font-size: 10px;
+    width: 30px;
+    text-align: left;
+  }
+  .table__content--currency {
+    text-align: left;
+  }
+  .table__content--item {
+    text-align: center;
+  }
+}
+
 .exchangeForm__operations {
   -webkit-box-shadow: var(--shadow);
           box-shadow: var(--shadow);
@@ -130,25 +167,54 @@ input[type="number"] {
 }
 
 .exchangeForm__inputAndSubmit {
+  margin-top: 30px;
   position: relative;
 }
 
 .exchangeForm__inputAndSubmit--error {
   position: absolute;
-  -webkit-transform: translate(50%);
-          transform: translate(50%);
-  right: 60%;
+  visibility: hidden;
+  left: 0;
   bottom: -20px;
-  width: 100px;
+  width: 220px;
   color: rgba(255, 0, 0, 0.692);
+  font-weight: 500;
 }
 
 .exchangeForm__inputAndSubmit i {
   position: absolute;
+  visibility: hidden;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   right: 70px;
   top: 50%;
+}
+
+.exchangeForm__inputAndSubmit i.fa-info-circle {
+  color: red;
+}
+
+.exchangeForm__inputAndSubmit i.fa-check-circle {
+  color: #029702bb;
+}
+
+.exchangeForm__inputAndSubmit input[type="number"] {
+  -moz-appearance: textfield;
+  color: #555;
+  -webkit-appearance: textfield;
+          appearance: textfield;
+  padding: 10px;
+  width: 150px;
+  border-radius: 4px;
+  border: 2px solid rgba(128, 128, 128, 0.76);
+}
+
+.exchangeForm__inputAndSubmit input[type="number"].succes {
+  border: 2px solid #029702bb;
+}
+
+.exchangeForm__inputAndSubmit input[type="number"].error {
+  border: 2px solid red;
 }
 
 .result {
@@ -160,5 +226,11 @@ input[type="number"] {
           justify-content: center;
   height: 50px;
   gap: 5px;
+}
+
+@media screen and (max-width: 767px) and (min-width: 375px) {
+  .exchangeForm__inputAndSubmit i {
+    right: 80px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
