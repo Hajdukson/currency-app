@@ -56,7 +56,7 @@ let errorHanddler = (message) => {
 export { validateValue };
 ```
 
-2. That peice is resposible for a getting API and loadding them to a table
+2. That peice is resposible for getting data from API and loadding them to a table
 
 ```javascript
 const api_url_tableC = "https://api.nbp.pl/api/exchangerates/tables/c";
@@ -112,4 +112,4 @@ exchangeForm.addEventListener("submit", (e) => {
 });
 ```
 
-Feel free to check out the rest of the code
+Feel free to check out rest of the code
